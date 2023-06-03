@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>User page</h1>
+<p>
+    Username: {{user.username}}<br>
+    First Name: {{user.first_name}}<br>
+    Last Name: {{user.last_name}}
+
+</p>
+{% if user.feedbacks %}
+<h1>Previous Feedback</h1>
+
+{% for feed in user.feedbacks %}
+<h2>{{feed.title}}</h2>
+<p>{{feed.content}}<p>
+<a href="feedback/{{feed.id}}/delete">Delete</a>
+<a href="feedback/{{feed.id}}/edit">Edit</a>
+
+{% endfor %}
+
+{% endif %}
+<h1>Create new feedback</h1>
+<form id="feedback-form" action="/feedback" method="POST">
+    {{ form.hidden_tag() }}
+  
+    {% for field in form
+           if field.widget.input_type != 'hidden' %}
+      <p>
+        {{ field.label(class_ = "form-control") }}
+        {{ field }}
+  
+        {% for error in field.errors %}
+          {{ error }}
+        {% endfor %}
+      </p>
+  
+    {% endfor %}
+    <button>Submit</button>
+</form>
+<form action="/delete/{{user.username}}" method="POST">
+    <button class="btn btn-primary">Delete User</button>
+</form>
+
+
+{% endblock %}

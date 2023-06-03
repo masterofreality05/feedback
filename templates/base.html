@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=#, initial-scale=1.0">
+    <title>Twitter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+ 
+</head>
+<body>
+    <div class="navbar navbar-light bg-white">
+        <div class="navbar-container">
+          {% if session['user_id'] %}
+          <form action="/logout" method="POST">
+          
+          <button type="submit" type="button" class="btn btn-link">Logout</button>
+
+          </form> 
+         
+          {% else %}
+          <a class="nav navbar-brand text-white"href="/login">Log In</a>
+          <a class="nav navbar-brand text-white"href="/register">Sign Up</a>
+          {% endif %}
+          
+          <div class="navbar-brand"><a class="text-white" href="/">Home</a></div>
+        </div>
+      </div>
+    <div class="container">
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% for cat, msg in messages %}
+    <div class="alert-{{cat}}">{{ msg }}</div>
+    {% endfor %}
+    {% endwith %}
+    {% block content %}
+
+    {% endblock %} 
+</div>
+<script src="static/app.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
