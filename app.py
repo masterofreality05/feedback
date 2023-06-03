@@ -81,14 +81,13 @@ def show_secret_page():
 @app.route("/users/<input>")
 def show_user_details(input):
      """a view function to show details of the user after login  (logged in homepage)"""
-     if "user_id" in session and session["user_id"] == input:
-        user = User.query.filter(User.username == input).first()
-        form = feebackCreator()
-        return render_template("user.html", user=user, form=form)
-     else:
+   
+     user = User.query.filter(User.username == input).first()
+     form = feebackCreator()
+     return render_template("user.html", user=user, form=form)
+    
          
-         flash("You do not have permission to view this user page", "danger")
-         return redirect("/")
+        
      
 @app.route("/feedback", methods=["POST"])
 def submit_feedback():
@@ -158,10 +157,6 @@ def delete_user(user_id):
 
 
 
-#Remove the user from the database and make sure to also delete all of their feedback. Clear any user information in the session and redirect to /. Make sure that only the user who is logged in can successfully delete their account
-#GET /users/<username>/feedback/add
-#Display a form to add feedback Make sure that only the user who is logged in can see this form
-#POST /users/<username>/feedback/add
 #Add a new piece of feedback and redirect to /users/<username> — Make sure that only the user who is logged in can successfully add feedback
 #GET /feedback/<feedback-id>/update
 #Display a form to edit feedback — **Make sure that only the user who has written that feedback can see this form **
