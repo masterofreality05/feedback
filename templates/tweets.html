@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>All tweets</h1>
+{% for tweet in tweets %}
+<h1>{{tweet.title}}</h1>
+<p>{{tweet.user.username}}</p>
+<p>{{tweet.content}}</p>
+<p>{{tweet.user.is_admin}}</p>
+{% if session['user_id'] == tweet.user.username or user.is_admin == True %}
+<a href="feedback/{{tweet.id}}/delete">Delete</a>
+<a href="feedback/{{tweet.id}}/edit">Edit</a>
+
+{% endif %}
+{% endfor %}
+{% endblock %}

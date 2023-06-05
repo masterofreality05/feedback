@@ -1,6 +1,6 @@
 from models import app
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Optional, Email
 
 class RegisterForm(FlaskForm):
@@ -9,6 +9,7 @@ class RegisterForm(FlaskForm):
     password = PasswordField("Password", validators=[InputRequired()])
     first_name = StringField("First Name", validators=[InputRequired()])
     last_name = StringField("Last Name", validators=[InputRequired()])
+    is_admin = BooleanField("Administrator")
 
 class Loginform(FlaskForm):
     """form for registering new users"""

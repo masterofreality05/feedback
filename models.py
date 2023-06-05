@@ -31,6 +31,9 @@ class User(db.Model):
     
     last_name = db.Column(db.String(30),
                         nullable=False)
+    is_admin = db.Column(db.Boolean,
+                         default=False
+                         )
     
     @classmethod
     def register(cls,password):
@@ -65,6 +68,7 @@ class Feedback(db.Model):
                       nullable=False)
     content = db.Column(db.Text,
                         nullable=False)
+    
     username = db.Column(db.ForeignKey('users.username'))
 
     user = db.relationship('User', backref="feedbacks")
