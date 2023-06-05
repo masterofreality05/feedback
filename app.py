@@ -9,6 +9,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///twitter"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SECRET_KEY"] = "abc123"
+
 connect_db(app)
 db.create_all()
 
@@ -143,22 +144,3 @@ def delete_user(user_id):
     else:
         flash("you are not permitted to delete this user","danger")
         return redirect(f"users/{user_id}")
-
-    
-#Make sure that if any of your form submissions fail, you display helpful error messages to the user about what went wrong.
-#-will ask about this one in the mentor 1-1
-
-
-#Tests! Having tests around authentication and authorization is a great way to save time compared to manually QA-ing your app.
-
-#Challenge Add functionality to reset a password. This will involve learning about sending emails (take a look at the Flask Mail module. You will need to use a transactional mail server to get this to work, gmail is an excellent option) and will require you to add a column to your users table to store a password reset token. HINT - here is how that data flow works
-#A user clicks a link and is taken to a form to input their email
-#If their email exists, send them an email with a link and a unique token in the query string (take a look at the built in secrets module and the token_urlsafe function. You will create this unique token and store it in the database
-#Once the user clicks on that link, take them to a form to reset their password (make sure that the unique token is valid before letting them access this form)
-#Once the form has been submitted, update the password in the database and delete the token created for that user
-
-
-
-
-
-
